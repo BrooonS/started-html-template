@@ -1,0 +1,31 @@
+{
+  "name": "framico",
+  "version": "3.0.0",
+  "description": "CSS framework designed for adaptive layout.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrooonS/Framico.git"
+  },
+  "author": "BrooonS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrooonS/Framico/issues"
+  },
+  "homepage": "http://framico.bananazz.pp.ua",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-babel": "^7.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-shorthand": "^1.1.0",
+    "imagemin-pngquant": "^5.0.1"
+  }
+}
