@@ -1,6 +1,12 @@
 # Started HTML Template
 Started HTML Template with SASS and Gulp.
 
+## What is that?
+
+With this template you can forget about routine matters which you do every time. In this template include Gulp which optimizes your images, assemble the project into one folder and converts SASS to CSS.
+
+If you want, you can put the add vendor prefixes to CSS files, and convert your JavaScript code to old standards (ES6) for older browsers, such as IE9.
+
 ## How to use?
 
  - Download this repository
@@ -8,6 +14,22 @@ Started HTML Template with SASS and Gulp.
  - Open command line
  - Write `npm i` to install main plugins
  - Run gulp with command `gulp default`
+
+### Other
+
+**Add vendor prefixes**
+Uncomment `autoprefixer` on line 28-31
+
+After uncomment autoprefixer adds where you need vendor prefixes.
+
+**Converting JavaScript to ES6**
+Uncomment `babel` on line 44-46
+
+Plugin it will process your code and rewrite it for old browsers.
+
+**Commands**
+ - `gulp clean` to delete `dist` folder
+ - `gulp build` to compilate your project in `dist` folder
 
 ## Author
 @BrooonS
