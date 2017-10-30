@@ -4,7 +4,7 @@ Started HTML Template with SASS and Gulp.
 ## How to use?
 
  - Download this repository
- - Unzip on some folder
+ - Unzip in some folder
  - Open command line
  - Write `npm i` to install main plugins
  - Run gulp with command `gulp default`
