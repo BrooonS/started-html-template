@@ -17,12 +17,12 @@ If you want, you can put the add vendor prefixes to CSS files, and convert your 
 
 ### Other
 
-**Add vendor prefixes**
+#### Add vendor prefixes
 Uncomment `autoprefixer` on line 28-31
 
 After uncomment autoprefixer adds where you need vendor prefixes.
 
-**Converting JavaScript to ES6**
+#### Converting JavaScript to ES6
 Uncomment `babel` on line 44-46
 
 Plugin it will process your code and rewrite it for old browsers.
