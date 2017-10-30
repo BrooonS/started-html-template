@@ -1,0 +1,86 @@
+*,
+*:after,
+*:before
+  box-sizing: border-box
+
+@media print
+  *
+    text-shadow: none !important
+    box-shadow: none !important
+
+::selection
+  background: lighten($default-site-color, 30%)
+  text-shadow: none
+
+html
+  font-size: $default-font-size
+
+body
+  font-size: 1rem
+  font-family: $default-font
+  color: $default-text-color
+  line-height: $default-line-height
+
+a
+  text-decoration: none
+  color: $default-site-color
+  cursor: pointer
+  &:hover
+    text-decoration: underline
+
+p
+  margin: .3rem 0 1rem
+
+img
+  max-width: 100%
+  vertical-align: middle
+
+hr
+  margin: 1.5rem 0
+  border: 0
+  border-top: 1px solid rgba(0, 0, 0, .1)
+
+blockquote
+  padding: 1rem 1.5rem
+  margin: 2rem 0
+  font-size: 1rem
+  border-left: 4px solid #e0e0e0
+  > i
+    font-size: .8rem
+    display: block
+    text-align: right
+    margin-top: 1rem
+  @media only screen and (min-width: $media-sm-min)
+    padding: 1rem 3.5rem
+    font-size: 1.2rem
+    > i
+      font-size: 1rem
+
+code
+  padding: 1px 3px
+  background-color: #e0e0e0
+  border-radius: 3px
+
+pre,
+code
+  font-size: 90%
+  overflow: auto
+  tab-size: 2
+
+pre
+  padding: .5rem 0
+  margin: .8rem 0
+  > code
+    display: block
+    padding: .8rem
+    font-size: 100%
+    margin: 0
+
+mark,
+pre,
+code
+  font-family: inherit
+
+mark
+  padding: 1px 3px
+  font-size: 85%
