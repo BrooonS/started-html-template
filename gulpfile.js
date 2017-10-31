@@ -1,7 +1,7 @@
 // plugins
 const gulp         = require('gulp');
 const sass         = require('gulp-sass');
-const concat       = require('gulp-concat');
+const minify       = require('gulp-minify');
 const cssnano      = require('gulp-cssnano');
 const rename       = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
@@ -39,13 +39,18 @@ gulp.task('sass', () => {
 // minify js
 gulp.task('scripts', () => {
   return gulp.src('src/js/scripts.js')
-    .pipe(concat('scripts.min.js'))
     // uncomment for support old browsers
     // .pipe(babel({
     //   presets: ['es2015']
     // }))
-    .pipe(gulp.dest('src/js'))
-    .pipe(browserSync.stream());
+    .pipe(minify({
+      ext: {
+        min: '.min.js'
+      },
+      noSource: true,
+      preserveComments: 'some'
+    }))
+    .pipe(gulp.dest('dist/js'));
 });
 
 // image optimization
@@ -61,7 +66,7 @@ gulp.task('img', () => {
 });
 
 // start server
-gulp.task('server', ['sass', 'scripts'], () => {
+gulp.task('server', ['sass'], () => {
 
   browserSync.init({
     server: "src",
@@ -69,11 +74,12 @@ gulp.task('server', ['sass', 'scripts'], () => {
   });
 
   gulp.watch(watch.html).on('change', browserSync.reload);
-  gulp.watch(watch.js ['scripts']).on('change', browserSync.reload);
+  gulp.watch(watch.js).on('change', browserSync.reload);
   gulp.watch(watch.sass, ['sass']).on('change', browserSync.reload);
   gulp.watch(watch.img).on('change', browserSync.reload);
 });
 
+// main task
 gulp.task('default', ['server']);
 
 // clean «dist» before build
