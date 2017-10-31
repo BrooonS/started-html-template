@@ -9,6 +9,8 @@ If you want, you can put the add vendor prefixes to CSS files, and convert your 
 
 ## How to use?
 
+Before you begin you must have installed the latest version [node.js]
+
  1. Download this repository
  2. Unzip on some folder
  3. Open command line
