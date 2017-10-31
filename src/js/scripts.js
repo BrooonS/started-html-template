@@ -1,1 +1,5 @@
-// some scripts
+(function($) {
+
+  // some scripts
+
+})(jQuery);
