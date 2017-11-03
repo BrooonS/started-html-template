@@ -22,7 +22,7 @@ const watch = {
 
 // sass compilation to css and minify
 gulp.task('sass', () => {
-  return gulp.src('src/sass/*.(sass|scss)')
+  return gulp.src('src/sass/*.+(sass|scss)')
     .pipe(sass())
     // uncomment for support old browsers
     // .pipe(autoprefixer(
