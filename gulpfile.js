@@ -69,7 +69,7 @@ gulp.task('img', () => {
 gulp.task('server', ['sass'], () => {
 
   browserSync.init({
-    server: 'src',
+    server: "src",
     port: '5000'
   });
 
