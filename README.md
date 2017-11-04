@@ -28,7 +28,7 @@ Before you begin you must have installed the latest version [node.js](https://no
 
 #### Add vendor prefixes
 
- - Uncomment `autoprefixer` on line 28-31
+ - Uncomment `autoprefixer` on line 38
  - After uncomment autoprefixer adds where you need vendor prefixes.
 
 #### Converting JavaScript to ES6
