@@ -4,7 +4,6 @@ const sass         = require('gulp-sass');
 const minify       = require('gulp-minify');
 const cssnano      = require('gulp-cssnano');
 const rename       = require('gulp-rename');
-const autoprefixer = require('gulp-autoprefixer');
 const shorthand    = require('gulp-shorthand');
 const babel        = require('gulp-babel');
 const browserSync  = require('browser-sync').create();
@@ -20,17 +19,24 @@ const watch = {
   img: 'src/img/**/*',
 }
 
+// supported browsers
+const supported = [
+  'ie >= 10',
+  'Firefox >= 11',
+  'Chrome >= 18',
+  'Safari >= 6',
+  'Opera >= 12.1'
+];
+
 // sass compilation to css and minify
 gulp.task('sass', () => {
   return gulp.src('src/sass/*.+(sass|scss)')
     .pipe(sass())
-    // uncomment for support old browsers
-    // .pipe(autoprefixer(
-    //   ['ie >= 10', 'Firefox >= 11', 'Chrome >= 18', 'Safari >= 6', 'Opera >= 12.1'],
-    //   { cascade: true }
-    // ))
     .pipe(shorthand())
-    .pipe(cssnano())
+    .pipe(cssnano({
+      // uncomment for support old browsers
+      // autoprefixer: {browsers: supported, add: true}
+    }))
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('src/css'))
     .pipe(browserSync.stream());
@@ -39,17 +45,22 @@ gulp.task('sass', () => {
 // minify js
 gulp.task('scripts', () => {
   return gulp.src('src/js/scripts.js')
+
     // uncomment for support old browsers
     // .pipe(babel({
     //   presets: ['es2015']
     // }))
-    .pipe(minify({
-      ext: {
-        min: '.min.js'
-      },
-      noSource: true,
-      preserveComments: 'some'
-    }))
+
+    // uncomment if you want to minify js
+    // do not forget change name in html to scripts.min.js
+    // .pipe(minify({
+    //   ext: {
+    //     min: '.min.js'
+    //   },
+    //   noSource: true,
+    //   preserveComments: 'some'
+    // }))
+
     .pipe(gulp.dest('dist/js'));
 });
 
@@ -79,7 +90,7 @@ gulp.task('server', ['sass'], () => {
   gulp.watch(watch.img).on('change', browserSync.reload);
 });
 
-// main task
+// default task
 gulp.task('default', ['server']);
 
 // clean «dist» before build
