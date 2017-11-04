@@ -15,7 +15,7 @@
 
   $extmods: (
     eot: "?",
-    svg: "#" + str-replace($name, " ", "_")
+    svg: "#" + str-replace($name, " ", "")
   );
 
   $formats: (
@@ -37,6 +37,6 @@
   }
 }
 
-// Example usage:
-// @import "_mixins/font-face"
+// Example usage in other files:
+// @import "mixins/font-face"
 // +font-face("DroidSans", "../fonts/DroidSans/DroidSans-Regular", 400)
