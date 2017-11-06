@@ -110,7 +110,7 @@ gulp.task('server', ['sass', 'scripts'], () => {
   });
 
   gulp.watch(watch.html).on('change', browserSync.reload);
-  gulp.watch(watch.js).on('change', browserSync.reload);
+  gulp.watch(watch.js, ['scripts']).on('change', browserSync.reload);
   gulp.watch(watch.sass, ['sass']).on('change', browserSync.reload);
   gulp.watch(watch.img).on('change', browserSync.reload);
 });
