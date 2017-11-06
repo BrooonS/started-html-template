@@ -1,15 +1,40 @@
-// plugins
+/**
+ * Plugins
+ */
+
+// main plugins
 const gulp         = require('gulp');
-const sass         = require('gulp-sass');
-const minify       = require('gulp-minify');
-const cssnano      = require('gulp-cssnano');
-const rename       = require('gulp-rename');
-const shorthand    = require('gulp-shorthand');
-const babel        = require('gulp-babel');
+const gulpif       = require('gulp-if');
 const browserSync  = require('browser-sync').create();
 const del          = require('del');
+const rename       = require('gulp-rename');
+const notify       = require('gulp-notify');
+// CSS plugins
+const sass         = require('gulp-sass');
+const minifyCSS    = require('gulp-clean-css');
+const shorthand    = require('gulp-shorthand');
+const autoprefixer = require('gulp-autoprefixer');
+// JS plugins
+const minifyJS     = require('gulp-minify');
+const babel        = require('gulp-babel');
+// image plugins
 const imagemin     = require('gulp-imagemin');
 const pngquant     = require('imagemin-pngquant');
+
+/**
+ * Config
+ */
+
+// supported old browsers
+const supported = true;
+// what browsers
+const browsers = [
+  'ie >= 10',
+  'Firefox >= 11',
+  'Chrome >= 18',
+  'Safari >= 6',
+  'Opera >= 12.1',
+];
 
 // watching files
 const watch = {
@@ -19,49 +44,48 @@ const watch = {
   img: 'src/img/**/*',
 }
 
-// supported browsers
-const supported = [
-  'ie >= 10',
-  'Firefox >= 11',
-  'Chrome >= 18',
-  'Safari >= 6',
-  'Opera >= 12.1'
-];
+/**
+ * Functions
+ */
 
-// sass compilation to css and minify
+// SASS compilation to CSS
 gulp.task('sass', () => {
   return gulp.src('src/sass/*.+(sass|scss)')
-    .pipe(sass())
+    .pipe(sass().on('error', notify.onError()))
     .pipe(shorthand())
-    .pipe(cssnano({
-      // uncomment for support old browsers
-      // autoprefixer: {browsers: supported, add: true}
-    }))
+
+    .pipe(gulpif(supported, autoprefixer({
+      browsers: browsers,
+      cascade: true
+    })))
+
+    // minify css
+    .pipe(minifyCSS())
     .pipe(rename({suffix: '.min'}))
+
     .pipe(gulp.dest('src/css'))
     .pipe(browserSync.stream());
 });
 
-// minify js
+// JS compilation
 gulp.task('scripts', () => {
   return gulp.src('src/js/scripts.js')
 
-    // uncomment for support old browsers
-    // .pipe(babel({
-    //   presets: ['es2015']
-    // }))
+    .pipe(gulpif(supported, babel({
+      presets: ['es2015']
+    })))
 
-    // uncomment if you want to minify js
-    // do not forget change name in html to scripts.min.js
-    // .pipe(minify({
-    //   ext: {
-    //     min: '.min.js'
-    //   },
-    //   noSource: true,
-    //   preserveComments: 'some'
-    // }))
+    // minify js
+    .pipe(minifyJS({
+      ext: {
+        min: '.min.js'
+      },
+      noSource: true,
+      preserveComments: 'some'
+    }))
 
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('src/js'))
+    .pipe(browserSync.stream());
 });
 
 // image optimization
@@ -77,9 +101,10 @@ gulp.task('img', () => {
 });
 
 // start server
-gulp.task('server', ['sass'], () => {
+gulp.task('server', ['sass', 'scripts'], () => {
 
   browserSync.init({
+    notify: false,
     server: 'src',
     port: '5000'
   });
@@ -101,16 +126,16 @@ gulp.task('clean', () => {
 // building
 gulp.task('build', ['clean', 'sass', 'scripts', 'img'], () => {
 
-  const buildHtml = gulp.src('src/*.html')
+  const buildHTML = gulp.src('src/*.html')
     .pipe(gulp.dest('dist'));
 
-  const buildCss = gulp.src('src/css/**/*.css')
+  const buildCSS = gulp.src('src/css/**/*.css')
     .pipe(gulp.dest('dist/css'));
 
-  const buildScripts = gulp.src(['src/js/**/*.js', '!src/js/scripts.js'])
+  const buildJS = gulp.src(['src/js/**/*.js', '!src/js/scripts.js'])
     .pipe(gulp.dest('dist/js'));
 
-  const buildFonts = gulp.src('src/fonts/**/*')
+  const buildFONTS = gulp.src('src/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 
 });
