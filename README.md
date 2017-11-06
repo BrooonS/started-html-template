@@ -32,7 +32,7 @@ Before you begin you must have installed the latest version [node.js](https://no
  - After change: autoprefixer and babel will be supported old browsers.
 
 #### Commands
- - `gulp build` to compilate your project in `dist` folder. **Note**: before building, `dist` folder will be removed.
+ - `gulp build` to compilate your project in `dist` folder. **Note**: before building, old `dist` folder will be removed.
 
 ## Author
 @BrooonS
