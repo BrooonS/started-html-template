@@ -1,5 +1,6 @@
 # Files to ignore
 debug.log
+npm-debug.log
 
 # Folders to ignore
 node_modules
