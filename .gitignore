@@ -1,3 +1,6 @@
+# Files to ignore
+debug.log
+
 # Folders to ignore
 node_modules
 dist
